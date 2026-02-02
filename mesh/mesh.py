@@ -7,17 +7,17 @@ from matplotlib import pyplot as plt
 
 
 class Mesh:
-    def __init__(self):
-        self.x = None
-        self.y = None
-        self.X = None
-        self.Y = None
-
-    def create_mesh(self, x: np.ndarray, y: np.ndarray) -> None:
+    def __init__(self, x: np.ndarray, y:np.ndarray):
         self.x = x
         self.y = y
-
         self.X, self.Y = np.meshgrid(self.x, self.y)
+        self.x_dist = None
+        self.y_dist = None
+        self._calc_distance_between_nodes()
+
+    def _calc_distance_between_nodes(self) -> None:
+        self.x_dist = abs(self.x[0] - self.x[1])
+        self.y_dist = abs(self.y[0] - self.y[1])
 
     def print_mesh(self, x_range: Tuple[int, int], y_range: Tuple[int, int]) -> None:
 
